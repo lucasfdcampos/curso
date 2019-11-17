@@ -1,11 +1,13 @@
 package br.com.curso.service;
 
 import br.com.curso.model.Curso;
+import br.com.curso.model.Videoaula;
 import br.com.curso.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -14,6 +16,9 @@ public class CursoService {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private VideoaulaService videoaulaService;
 
     public CursoService() {
         super();
@@ -25,11 +30,22 @@ public class CursoService {
     }
 
     public void save(Curso curso) {
+        curso.setDataInicio(new Date());
         this.cursoRepository.save(curso);
+
+        if (curso.getVideoaulas() != null) {
+            curso.getVideoaulas()
+                    .parallelStream()
+                    .forEach(curso::addVideoaula);
+        }
     }
 
     public void update(Long id, Curso curso) {
         curso.setId(id);
+        curso.setTitulo(curso.getTitulo());
+        curso.setDataInicio(new Date());
+        curso.setAtivo(curso.getAtivo());
+        curso.setCargaHoraria(curso.getCargaHoraria());
         this.cursoRepository.save(curso);
     }
 

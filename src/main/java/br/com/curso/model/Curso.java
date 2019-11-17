@@ -1,6 +1,7 @@
 package br.com.curso.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,11 +20,12 @@ public class Curso implements Serializable {
         super();
     }
 
-    public Curso(Long id, @NotNull String titulo, @NotNull Date dataInicio, CargaHoraria cargaHoraria) {
+    public Curso(Long id, @NotNull String titulo, @NotNull Date dataInicio, CargaHoraria cargaHoraria, Boolean ativo) {
         this.id = id;
         this.titulo = titulo;
         this.dataInicio = dataInicio;
         this.cargaHoraria = cargaHoraria;
+        this.ativo = ativo;
     }
 
     @Id
@@ -47,6 +49,7 @@ public class Curso implements Serializable {
     @Column(nullable = false, name = "ativo")
     private Boolean ativo;
 
+    @JsonIgnoreProperties({"curso"})
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Videoaula> videoaulas;
 
@@ -82,11 +85,11 @@ public class Curso implements Serializable {
         this.cargaHoraria = cargaHoraria;
     }
 
-    public Boolean getActive() {
+    public Boolean getAtivo() {
         return ativo;
     }
 
-    public void setActive(Boolean ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 

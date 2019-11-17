@@ -86,6 +86,6 @@ public class Videoaula implements Serializable {
 
     @Override
     public String toString() {
-        return "Videoaula [id=" + id + ", titulo='" + titulo + ", numero=" + numero +", curso=" + curso + "]";
+        return "Videoaula [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", numero=" + numero + "]";
     }
 }

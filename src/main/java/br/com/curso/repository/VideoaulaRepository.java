@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface VideoaulaRepository extends JpaRepository<Videoaula, Long> {
 
-    @Query("select v from Videoaula v where v.id = ?1 and v.curso.id = ?1")
+    @Query("select v from Videoaula v where v.id = ?1 and v.curso.id = ?2")
     Videoaula findByIdVideoaulaAndIdCurso(Long idVideoaula, Long idCurso);
 
     @Query("select v from Videoaula v where v.curso.id = ?1")
