@@ -18,27 +18,47 @@ public class CursoController {
 
     @PostMapping(value = "/add")
     public ResponseEntity<String> addCurso(@RequestBody Curso curso) {
-        this.cursoService.save(curso);
-        return new ResponseEntity<String>(curso.toString(), HttpStatus.OK);
+        try {
+            this.cursoService.save(curso);
+            return new ResponseEntity<String>(curso.toString(), HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.toString(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<String> updateCurso(@PathVariable("id") Long id, @RequestBody Curso curso) {
-        this.cursoService.update(id, curso);
-        return new ResponseEntity<String>(curso.toString(), HttpStatus.OK);
+        try {
+            this.cursoService.update(id, curso);
+            return new ResponseEntity<String>(curso.toString(), HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.toString(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCurso(@PathVariable("id") Long id) {
-        this.cursoService.delete(id);
-        return new ResponseEntity<String>("DELETED", HttpStatus.OK);
+        try {
+            this.cursoService.delete(id);
+            return new ResponseEntity<String>("DELETED", HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.toString(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getCurso(@PathVariable("id") Long id) {
-        Curso curso = null;
-        curso = this.cursoService.findById(id);
-        return new ResponseEntity<String>(curso.toString(), HttpStatus.OK);
+        try {
+            Curso curso = null;
+            curso = this.cursoService.findById(id);
+            return new ResponseEntity<String>(curso.toString(), HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.toString(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/list")
