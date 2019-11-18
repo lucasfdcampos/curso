@@ -44,7 +44,7 @@ public class Videoaula implements Serializable {
     private Integer numero;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnoreProperties({"videoaulas"})
+    @JsonIgnoreProperties({"videoaulas", "titulo", "cargaHoraria", "ativo"})
     @ManyToOne
     @JoinColumn(name = "curso")
     private Curso curso;

@@ -51,4 +51,9 @@ public class VideoaulaController {
         List<Videoaula> videoaulas = this.videoaulaService.findAllByCurso(idCurso);
         return new ResponseEntity<String>(videoaulas.toString(), HttpStatus.OK);
     }
+
+    @GetMapping()
+    public List<Videoaula> listAllEntity(@PathVariable("idCurso") Long idCurso) {
+        return this.videoaulaService.findAllByCurso(idCurso);
+    }
 }
