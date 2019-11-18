@@ -66,4 +66,9 @@ public class CursoController {
         List<Curso> cursos = this.cursoService.findAll();
         return new ResponseEntity<String>(cursos.toString(), HttpStatus.OK);
     }
+
+    @GetMapping()
+    public List<Curso> listAllEntity() {
+        return this.cursoService.findAll();
+    }
 }

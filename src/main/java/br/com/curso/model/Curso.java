@@ -2,6 +2,7 @@ package br.com.curso.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -49,6 +50,7 @@ public class Curso implements Serializable {
     @Column(nullable = false, name = "ativo")
     private Boolean ativo;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties({"curso"})
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Videoaula> videoaulas;

@@ -1,5 +1,8 @@
 package br.com.curso.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -40,6 +43,8 @@ public class Videoaula implements Serializable {
     @Column(nullable = false, name = "numero")
     private Integer numero;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnoreProperties({"videoaulas"})
     @ManyToOne
     @JoinColumn(name = "curso")
     private Curso curso;
